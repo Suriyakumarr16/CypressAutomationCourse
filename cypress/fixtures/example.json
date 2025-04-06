@@ -1,0 +1,18 @@
+{
+  "product" : "Mac",
+  "quantity" : "2",
+  "firstname": "Testf",
+  "lastname": "Testl",
+  "day" : "16",
+  "month" : "6",
+  "year" : "1998" ,
+  "email": "Testfl170009@yopmail.com",
+  "company" : "TestCompany" ,
+  "password" : "Password1",
+  "confirmpassword" : "Password1" ,
+  "regconfirmationtext" : "Your registration completed" ,
+  "authemail" : "testmailer160@gmail.com" ,
+  "authpassword" : "Password1" ,
+  "invalidemail" : "test@test.com",
+  "invalidpassword" : "Password" 
+}

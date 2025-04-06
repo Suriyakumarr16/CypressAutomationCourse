@@ -1,0 +1,18 @@
+{
+  "name": "yorbitcypress_61096001",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules\\.bin\\cypress run",
+    "chromeTest": "npm run test -- --browser chrome",
+    "recordDashboardTest" : "npm run test -- --record --key f0cb9d54-17cd-495b-8208-b0a201a20d50 --reporter mochawesome"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.2.0",
+    "mocha": "^10.2.0",
+    "mochawesome": "^7.1.3"
+  }
+}

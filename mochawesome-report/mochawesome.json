@@ -1,0 +1,195 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-09-27T10:58:23.008Z",
+    "end": "2023-09-27T11:00:03.288Z",
+    "duration": 100280,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "abd1addb-aed0-4fe6-ba19-a079698f7633",
+      "title": "",
+      "fullFile": "cypress\\e2e\\E2Etests.cy.js",
+      "file": "cypress\\e2e\\E2Etests.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e1bfa953-ae8a-48d6-9f1f-dc756d4cc52d",
+          "title": "E2Etests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Add To Cart",
+              "fullTitle": "E2Etests Add To Cart",
+              "timedOut": null,
+              "duration": 39854,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(Cypress.env('url'));\nhomePage.getSearchBox().type(this.data.product);\nhomePage.getSearchBtn().click();\nsearchResultsPage.getProductItems().each(($el, index, $list) => {\n  if ($el.text().includes('Apple MacBook')) {\n    searchResultsPage.getAddToCartBtn().eq(index).trigger(\"click\");\n  }\n});\nvar expectedprice = 0;\nproductDetailsPage.getPriceofProduct().then(function (priceofoneqty) {\n  const pricetext = priceofoneqty.text();\n  expectedprice = pricetext.split(\"$\");\n  expectedprice = expectedprice[1].replace(/\\D/g, '');\n  expectedprice = Number(expectedprice) * 2;\n}).then(function () {\n  cy.log('expected price ' + '= ' + expectedprice);\n});\nproductDetailsPage.getQtyTextBox().clear();\nproductDetailsPage.getQtyTextBox().type(this.data.quantity);\nproductDetailsPage.getAddToCartBtn().click();\nproductDetailsPage.getShoppingCartLnk().click();\ncartPage.getTotalAmtTxt().then(function (subtotal) {\n  const actualtotalpricetext = subtotal.text();\n  var actualtotalprice = actualtotalpricetext.split(\"$\");\n  actualtotalprice = actualtotalprice[1].replace(/\\D/g, '');\n  expect(Number(actualtotalprice)).to.equal(expectedprice);\n});",
+              "err": {},
+              "uuid": "6b4250cc-8e50-471b-ae27-f692e18847d0",
+              "parentUUID": "e1bfa953-ae8a-48d6-9f1f-dc756d4cc52d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Registration",
+              "fullTitle": "E2Etests Registration",
+              "timedOut": null,
+              "duration": 17707,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(Cypress.env('url') + \"login?returnUrl=%2\");\nloginPage.getRegisterBtn().click();\nregisterPage.getGenderRdoBtn().check().should('be.checked');\nregisterPage.getFirstNameTextBox().type(this.data.firstname);\nregisterPage.getLastNameTextBox().type(this.data.lastname);\nregisterPage.getDayDrpdown().select(this.data.day).should('have.value', '16');\nregisterPage.getMonthDrpdown().select(this.data.month).should('have.value', '6');\nregisterPage.getYearDrpdown().select(this.data.year).should('have.value', '1998');\nconst randomnum = () => Cypress._.random(0, 1e6);\nconst num = randomnum();\nvalidmailid = `test${num}@test.com`;\nthis.data.mailid = validmailid;\nregisterPage.getEmailTextBox().type(this.data.mailid);\nregisterPage.getCompanyTextBox().type(this.data.company);\nregisterPage.getNewsLetterRdoBtn().uncheck().should('not.be.checked');\nregisterPage.getNewsLetterRdoBtn().check().should('be.checked');\nregisterPage.getPasswordTextBox().type(this.data.password);\nregisterPage.getConfirmPasswordTextBox().type(this.data.confirmpassword);\nregisterPage.getRegisterBtn().click();\nregisterPage.getRegistrationText().should('have.text', this.data.regconfirmationtext);",
+              "err": {},
+              "uuid": "e1ca9f0d-8fb3-4cc5-9d71-0ebaf45439e2",
+              "parentUUID": "e1bfa953-ae8a-48d6-9f1f-dc756d4cc52d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ValidLogin",
+              "fullTitle": "E2Etests ValidLogin",
+              "timedOut": null,
+              "duration": 6088,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(Cypress.env('url'));\nhomePage.getLoginBtn().click();\nthis.data.authemail = validmailid;\ncy.login(this.data.authemail, this.data.authpassword);\nhomePage.getMyAccountBtn().should('be.visible');",
+              "err": {},
+              "uuid": "7c30da35-9e02-4687-a39a-1e809105c8cb",
+              "parentUUID": "e1bfa953-ae8a-48d6-9f1f-dc756d4cc52d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "InvalidLogin",
+              "fullTitle": "E2Etests InvalidLogin",
+              "timedOut": null,
+              "duration": 9206,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(Cypress.env('url'));\nhomePage.getLoginBtn().click();\ncy.login(this.data.invalidemail, this.data.invalidpassword);\nloginPage.getLoginErrorMsg().should('be.visible');",
+              "err": {},
+              "uuid": "6d435256-859c-45af-8521-9152d41c4db7",
+              "parentUUID": "e1bfa953-ae8a-48d6-9f1f-dc756d4cc52d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "XHRResponseMockTesting",
+              "fullTitle": "E2Etests XHRResponseMockTesting",
+              "timedOut": null,
+              "duration": 9938,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(Cypress.env('url'));\ncy.intercept({\n  method: 'GET',\n  url: 'https://demo.nopcommerce.com/catalog/searchtermautocomplete?term=Apple'\n}, {\n  statusCode: 200,\n  body: [{\n    \"label\": \"Apple iCam\",\n    \"producturl\": \"/apple-icam\",\n    \"productpictureurl\": null,\n    \"showlinktoresultsearch\": false\n  }]\n}).as('searchretreivals');\ncy.get('.search-box-text').type('Apple');\ncy.wait('@searchretreivals').then(({\n  request,\n  response\n}) => {\n  cy.get('.ui-menu-item').should('have.length', response.body.length);\n});\ncy.get('.ui-menu-item').should(\"have.text\", \"Apple iCam\");\n//Demonstrate on Mocking API with stub response using Cypres",
+              "err": {},
+              "uuid": "17f6de23-8f9a-45a6-b598-941a14c70e99",
+              "parentUUID": "e1bfa953-ae8a-48d6-9f1f-dc756d4cc52d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "XHRAPITest",
+              "fullTitle": "E2Etests XHRAPITest",
+              "timedOut": null,
+              "duration": 5098,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request('POST', 'https://reqres.in/api/users?page=2', {\n  \"email\": \"george.edwards@reqres.in\",\n  \"first_name\": \"George\",\n  \"last_name\": \"Edwards\",\n  \"avatar\": \"https://reqres.in/img/faces/11-image.jpg\"\n}).then(response => {\n  expect(response.status).to.equal(201);\n  expect(response.body).to.have.property(\"first_name\", \"George\");\n});\n//Handle API call directly without involving browser with cypres",
+              "err": {},
+              "uuid": "aaaa44f1-66ce-4914-8ad8-4458638c6a0c",
+              "parentUUID": "e1bfa953-ae8a-48d6-9f1f-dc756d4cc52d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6b4250cc-8e50-471b-ae27-f692e18847d0",
+            "e1ca9f0d-8fb3-4cc5-9d71-0ebaf45439e2",
+            "7c30da35-9e02-4687-a39a-1e809105c8cb",
+            "6d435256-859c-45af-8521-9152d41c4db7",
+            "17f6de23-8f9a-45a6-b598-941a14c70e99",
+            "aaaa44f1-66ce-4914-8ad8-4458638c6a0c"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 87891,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
